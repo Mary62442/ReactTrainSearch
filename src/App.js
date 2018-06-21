@@ -54,11 +54,26 @@ class App extends Component {
   };
 
   handleFrecce = () => {
-    this.setState({frecce:true, regional:false})
+    if (this.state.frecce) {
+      this.setState({frecce:false})
+    }
+
+    else {
+      this.setState({frecce:true, regional:false})
+    }
+    
   };
 
   handleRegional = () => {
-    this.setState({frecce:false, regional:true})
+
+    if (this.state.regional) {
+      this.setState({regional:false})
+    }
+
+    else {
+      this.setState({regional:true, frecce:false})
+    }
+    
   }
 
   checkAFields = () => {
@@ -197,9 +212,9 @@ class App extends Component {
           
           <div className = "frecce-regionali">
             <label htmlFor="frecce">Solo freccie</label>
-            <input type="radio" id="frecce" checked = {this.state.frecce} onChange={this.handleFrecce}/>
+            <input type="checkbox" id="frecce" checked = {this.state.frecce} onChange={this.handleFrecce}/>
             <label htmlFor="regionali">Solo Regionali</label>
-            <input type="radio" id="regionali" checked = {this.state.regional} onChange={this.handleRegional}/> 
+            <input type="checkbox" id="regionali" checked = {this.state.regional} onChange={this.handleRegional}/> 
           </div>
           
           <div className = "option-cartafreccia">
