@@ -42,8 +42,22 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log(this.refs.partenza.value)
+   
   };
+
+  autocompleteFetch = (name) => {
+
+    fetch(`http://localhost:8000/autofillstation?name=${name}`, {method: "GET"})
+			.then(response => response.json())
+			.then(hints => {
+				console.log(hints);        
+      });
+  }
+
+  originComplete = (e) => {
+    if ( e.target.value.length < 2) return;
+    this.autocompleteFetch(e.target.value);
+  }
 
   handleAFlag = () => {
     this.setState({ar : "A"});
@@ -181,7 +195,7 @@ class App extends Component {
           
           <div className = "stazioni">
             <label htmlFor = "partenza">Partenza</label>
-            <input type="text" id="partenza" ref = "partenza"/>
+            <input type="text" id="partenza" ref = "partenza" onChange = {this.originComplete}/>
             <br/>
             <label htmlFor = "arrivo">Arrivo</label>
             <input type="text" id="arrivo" ref = "arrivo"/>
